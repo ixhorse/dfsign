@@ -64,18 +64,18 @@ def _generate_mask(img_path, label_df):
         # chip mask 40x23, model input size 640x320
         mask_w, mask_h = 50, 29
 
-        region_mask = np.zeros((mask_h, mask_w), dtype=np.uint8)
+        # region_mask = np.zeros((mask_h, mask_w), dtype=np.uint8)
         boxes = get_box(label_df, img_name)
         for box in boxes:
             xmin = np.floor(1.0 * box[0] / width * mask_w).astype(np.int32)
             ymin = np.floor(1.0 * box[1] / height * mask_h).astype(np.int32)
             xmax = np.floor(1.0 * box[2] / width * mask_w).astype(np.int32)
             ymax = np.floor(1.0 * box[3] / height * mask_h).astype(np.int32)
-            ignore_xmin = xmin - 1 if xmin - 1 >= 0 else 0
-            ignore_ymin = ymin - 1 if ymin - 1 >= 0 else 0
-            ignore_xmax = xmax + 1 if xmax + 1 < mask_w else mask_w - 1
-            ignore_ymax = ymax + 1 if ymax + 1 < mask_h else mask_h - 1
-            region_mask[ignore_ymin : ignore_ymax+1, ignore_xmin : ignore_xmax+1] = 255
+            # ignore_xmin = xmin - 1 if xmin - 1 >= 0 else 0
+            # ignore_ymin = ymin - 1 if ymin - 1 >= 0 else 0
+            # ignore_xmax = xmax + 1 if xmax + 1 < mask_w else mask_w - 1
+            # ignore_ymax = ymax + 1 if ymax + 1 < mask_h else mask_h - 1
+            # region_mask[ignore_ymin : ignore_ymax+1, ignore_xmin : ignore_xmax+1] = 255
             region_mask[ymin : ymax+1, xmin : xmax+1] = 1
         maskname = os.path.join(segmentation_dir, img_name[:-4] + '_region.png')
         cv2.imwrite(maskname, region_mask)

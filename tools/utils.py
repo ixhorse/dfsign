@@ -4,13 +4,6 @@ import numpy as np
 import random
 import matplotlib.pyplot as plt
 
-TT100K_CLASSES = (
-    'p11', 'pl5', 'pne', 'il60', 'pl80', 'pl100', 'il80', 'po', 'w55', 
-    'pl40', 'pn', 'pm55', 'w32', 'pl20', 'p27', 'p26', 'p12', 'i5', 
-    'pl120', 'pl60', 'pl30', 'pl70', 'pl50', 'ip', 'pg', 'p10', 'io', 
-    'pr40', 'p5', 'p3', 'i2', 'i4', 'ph4', 'wo', 'pm30', 'ph5', 'p23', 
-    'pm20', 'w57', 'w13', 'p19', 'w59', 'il100', 'p6', 'ph4.5')
-
 
 def get_label_box(label_df, im_name):
     boxes = []
