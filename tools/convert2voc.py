@@ -9,6 +9,7 @@ import glob
 import cv2
 import random
 import shutil
+import argparse
 import numpy as np
 import pandas as pd
 import concurrent.futures
@@ -85,6 +86,12 @@ def _generate_mask(img_path, label_df):
 
 
 if __name__ == "__main__":
+    parser = argparse.ArgumentParser(description="convert to voc dataset")
+    parser.add_argument('mode', type=str, default='train',
+                        choices=['train', 'test', 'train_test'],
+                        help='for train or test')
+    args = parser.parse_args()
+
     if not os.path.exists(dest_datadir):
         os.mkdir(dest_datadir)
         os.mkdir(image_dir)
@@ -100,9 +107,7 @@ if __name__ == "__main__":
     # read label
     df = pd.read_csv(src_annotation)
     
-    trainval = True
-    test = False
-    if trainval:
+    if 'train' in args.mode:
         with open(os.path.join(list_folder, 'train.txt'), 'w') as f:
             temp = [os.path.basename(x)[:-4]+'\n' for x in train_list]
             f.writelines(temp)
@@ -120,7 +125,7 @@ if __name__ == "__main__":
             exector.map(_generate_mask, all_list, [df]*len(all_list))
         print('done.')
 
-    if test:
+    if 'test' in args.mode:
         with open(os.path.join(list_folder, 'test.txt'), 'w') as f:
             temp = [os.path.basename(x)[:-4]+'\n' for x in test_list]
             f.writelines(temp)
