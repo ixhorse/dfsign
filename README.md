@@ -1,3 +1,7 @@
+# datafountain sign detection
+
+**分割->抠图->检测**
+
 ### requirements
 ```
 python=3.7
@@ -54,13 +58,13 @@ python setup.py develop
 ``` bash
 cd $WORKDIR/tools
 # generate segmentation dataset
-python convert2voc.py
+python convert2voc.py train_test
 # generate detection trainset
 python generate_train_chip.py
 ```
 
 ### 训练
-pass
+使用deeplab和mmdetection中cascade
 
 ### 测试
 ``` bash
