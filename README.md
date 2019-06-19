@@ -2,6 +2,8 @@
 
 **分割->抠图->检测**
 
+**比赛精度要求太高，关键还是使用cascade+更好的backbone，其他大佬基本都用了cvpr19-HRNet**
+
 ### requirements
 ```
 python=3.7
